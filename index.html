@@ -2,73 +2,21 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Chat</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Chat Online</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <div class="container">
-      <div class="header">
-        <h1>Chat</h1>
+    <div class="chat-container">
+      <div class="chat-header">
+        <h2>Chat Online</h2>
       </div>
-      <div class="message-list"></div>
-      <div class="footer">
-        <input type="text" class="input-message" placeholder="Digite uma mensagem...">
-        <button class="button-send">Enviar</button>
+      <div class="chat-history" id="chat-history">
+      </div>
+      <div class="chat-message-container">
+        <input type="text" placeholder="Digite sua mensagem aqui..." id="chat-message-input">
+        <button type="button" id="chat-send-button">Enviar</button>
       </div>
     </div>
-    <script>
-      const inputMessage = document.querySelector('.input-message');
-      const buttonSend = document.querySelector('.button-send');
-      const messageList = document.querySelector('.message-list');
-
-      function sendMessage() {
-        const message = inputMessage.value.trim();
-
-        if (message) {
-          const messageElement = createMessageElement(message, 'sent');
-          messageList.appendChild(messageElement);
-          inputMessage.value = '';
-          messageList.scrollTop = messageList.scrollHeight;
-        }
-      }
-
-      function receiveMessage() {
-        const message = 'Olá, como vai?';
-        const messageElement = createMessageElement(message, 'received');
-        messageList.appendChild(messageElement);
-        messageList.scrollTop = messageList.scrollHeight;
-      }
-
-      function createMessageElement(message, type) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('message', type);
-        messageElement.innerHTML = `
-          <p>${message}</p>
-          <span class="time">${getTime()}</span>
-          <button class="button-delete">X</button>
-        `;
-        messageElement.querySelector('.button-delete').addEventListener('click', () => {
-          messageElement.remove();
-        });
-        return messageElement;
-      }
-
-      function getTime() {
-        const now = new Date();
-        const hours = now.getHours().toString().padStart(2, '0');
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        return `${hours}:${minutes}`;
-      }
-
-      buttonSend.addEventListener('click', sendMessage);
-      inputMessage.addEventListener('keyup', (event) => {
-        if (event.key === 'Enter') {
-          sendMessage();
-        }
-      });
-
-      // Simulando uma mensagem recebida após 1 segundo
-      setTimeout(receiveMessage, 1000);
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
